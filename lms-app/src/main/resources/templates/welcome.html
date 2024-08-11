@@ -1,10 +1,121 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Welcome</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .dashboard-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .dashboard-container h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .dropdown {
+            margin-bottom: 1.5rem;
+        }
+        .dropdown label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .dropdown select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .dropdown select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .submit-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <a href="/logout">Logout</a>
+    <div class="dashboard-container">
+        <h1>Dashboard</h1>
+        <div class="dropdown">
+            <label for="attendance">Attendance</label>
+            <select id="attendance">
+                <option value="" disabled selected>Select an option</option>
+                <option value="view">View Attendance</option>
+                <option value="mark">Mark Attendance</option>
+            </select>
+        </div>
+        <div class="dropdown">
+            <label for="applyLeave">Apply Leave</label>
+            <select id="applyLeave">
+                <option value="" disabled selected>Select an option</option>
+                <option value="apply">Apply for Leave</option>
+                <option value="viewPolicy">View Leave Policy</option>
+            </select>
+        </div>
+        <div class="dropdown">
+            <label for="leaveStatus">Leave Status</label>
+            <select id="leaveStatus">
+                <option value="" disabled selected>Select an option</option>
+                <option value="viewStatus">View Leave Status</option>
+                <option value="cancelLeave">Cancel Leave</option>
+            </select>
+        </div>
+        <button class="submit-button">Submit</button>
+        <a href="/logout"> Logout</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.submit-button').on('click', function() {
+                const attendanceValue = $('#attendance').val();
+                const applyLeaveValue = $('#applyLeave').val();
+                const leaveStatusValue = $('#leaveStatus').val();
+
+                if (!attendanceValue && !applyLeaveValue && !leaveStatusValue) {
+                    alert('Please select an option from one of the dropdowns.');
+                    return;
+                }
+
+                // Example actions based on selected dropdown value
+                if (attendanceValue) {
+                    alert('You selected: ' + attendanceValue);
+                } else if (applyLeaveValue) {
+                    alert('You selected: ' + applyLeaveValue);
+                } else if (leaveStatusValue) {
+                    alert('You selected: ' + leaveStatusValue);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

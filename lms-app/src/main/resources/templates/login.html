@@ -2,21 +2,110 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        .login-container label {
+            font-weight: bold;
+            color: #333;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0 1rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #2980b9;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Login</h1>
-    <form action="/login" method="post">
-        <div>
-            <label>Username:</label>
-            <input type="text" name="username" />
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" name="password" />
-        </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-    </form>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm" action="/login" method="post">
+            <div>
+                <label>Username:</label>
+                <input type="text" name="username" id="username" />
+                <div class="error-message" id="usernameError">Please enter your username.</div>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" name="password" id="password" />
+                <div class="error-message" id="passwordError">Please enter your password.</div>
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                let valid = true;
+
+                if ($('#username').val().trim() === '') {
+                    $('#usernameError').show();
+                    valid = false;
+                } else {
+                    $('#usernameError').hide();
+                }
+
+                if ($('#password').val().trim() === '') {
+                    $('#passwordError').show();
+                    valid = false;
+                } else {
+                    $('#passwordError').hide();
+                }
+
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
